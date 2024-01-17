@@ -1,1 +1,0 @@
-# kmcHospital-practise-project
