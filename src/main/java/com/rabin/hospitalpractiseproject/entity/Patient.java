@@ -1,6 +1,7 @@
 package com.rabin.hospitalpractiseproject.entity;
 
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.ToString;
 
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -20,6 +22,7 @@ public class Patient extends BaseEntity {
     private String name;
     @Column(name = "patient_dob", nullable = false)
     private LocalDate birthDate;
+//    private Date birthDate;
     @Column(name = "patient_address")
     private String address;
     @Column(name = "patient_email", nullable = false)
