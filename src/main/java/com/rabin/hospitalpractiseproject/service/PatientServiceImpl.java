@@ -1,9 +1,11 @@
 package com.rabin.hospitalpractiseproject.service;
 
+
+import com.rabin.hospitalpractiseproject.annotation.LogPayloads;
+import com.rabin.hospitalpractiseproject.annotation.TrackExecutionTime;
 import com.rabin.hospitalpractiseproject.dto.PatientDto;
 import com.rabin.hospitalpractiseproject.entity.Patient;
-import com.rabin.hospitalpractiseproject.exception.InternalServerError;
-import com.rabin.hospitalpractiseproject.exception.NullEmailNotAllowException;
+
 import com.rabin.hospitalpractiseproject.exception.PatientAlreadyExistException;
 import com.rabin.hospitalpractiseproject.exception.SingleMethodForAllException;
 import com.rabin.hospitalpractiseproject.repository.PatientRepository;
@@ -28,8 +30,20 @@ public class PatientServiceImpl implements PatientService {
     private PasswordEncoder passwordEncoder;
 
 
+    //joinpoint
+    //pointcut (com.rabin.hospitalpractiseproject.service.savingPatentRecordIntoDataBase.*())
     @Override
+    //Before Advice
+    @TrackExecutionTime
+    @LogPayloads
     public PatientDto savingPatentRecordIntoDataBase(PatientDto patientDto) {
+        //(--AOP--)
+        //TransactionAspect
+        //loggingAspect
+        //validationAspect
+        //auditingAspect
+        //notificationAspect
+
         try {
 
             Optional<Patient> existingPatient = patientRepository.findByEmail(patientDto.getEmail().toLowerCase());
@@ -39,6 +53,7 @@ public class PatientServiceImpl implements PatientService {
 //            if(patientDto.getEmail()==null || patientDto.getEmail().isEmpty()){
 //                throw new NullEmailNotAllowException("Patient email is null or empty so it is not allow");
 //            }
+
 
             Patient patient = new Patient();
 
@@ -61,5 +76,9 @@ public class PatientServiceImpl implements PatientService {
             throw new SingleMethodForAllException(exception.getMessage());
         }
     }
+    //After Advice -> consider Exception
+    //After returning Advice -> No Exception
+    //After throwing advice -> if any exception occurs
+    //around advice -> Before + After returning
 
 }
