@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -76,9 +77,23 @@ public class PatientServiceImpl implements PatientService {
             throw new SingleMethodForAllException(exception.getMessage());
         }
     }
+
+
     //After Advice -> consider Exception
     //After returning Advice -> No Exception
     //After throwing advice -> if any exception occurs
     //around advice -> Before + After returning
+
+
+    @Override
+    @TrackExecutionTime
+    public List<PatientDto> gettingAllListOfRecord() {
+        List<Patient> patients = patientRepository.findAll();
+        return patients.stream().map(patient -> {
+            PatientDto patientDto = new PatientDto();
+            BeanUtils.copyProperties(patient, patientDto);
+            return patientDto;
+        }).toList();
+    }
 
 }
