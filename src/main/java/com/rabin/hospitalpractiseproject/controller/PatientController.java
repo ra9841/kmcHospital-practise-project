@@ -23,9 +23,6 @@ public class PatientController {
         return ResponseEntity.status(HttpStatus.CREATED).body(patientService.savingPatentRecordIntoDataBase(patientDto));
     }
 
-    @GetMapping
-    public List<PatientDto> gettingAllRecordOfPatient(){
-        return patientService.gettingAllListOfRecord();
-    }
+
 
 }

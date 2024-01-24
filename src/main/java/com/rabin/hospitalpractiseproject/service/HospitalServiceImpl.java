@@ -64,6 +64,7 @@ public class HospitalServiceImpl implements HospitalService {
             return hospitals.stream().map(hospital -> {
                 HospitalDto hospitalDto = new HospitalDto();
                 BeanUtils.copyProperties(hospital, hospitalDto);
+                log.info("data from database {}" , hospitalDto);
                 return hospitalDto;
             }).toList();
         } catch (Exception e) {

@@ -7,12 +7,14 @@ import com.rabin.hospitalpractiseproject.exception.DoctorEmailAlreadyExistExcept
 import com.rabin.hospitalpractiseproject.exception.DoctorEpNumberDoesNotMatch;
 import com.rabin.hospitalpractiseproject.exception.InternalServerError;
 import com.rabin.hospitalpractiseproject.repository.DoctorRepository;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.ReflectionUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import javax.swing.text.html.Option;
 import java.lang.reflect.Field;
@@ -71,10 +73,14 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<DoctorDto> getAllDoctorRecord() {
         try {
+            log.info("service layer is execution started....");
             List<Doctor> doctors = doctorRepository.findAll();
+            log.info("Record in database {}", doctors);
             return doctors.stream().map(doctor -> {
+                log.info("All record from database {}", doctor);
                 DoctorDto doctorDto = new DoctorDto();
                 BeanUtils.copyProperties(doctor, doctorDto);
+                log.info("All record from database transfer to doctorDto {}", doctorDto);
                 return doctorDto;
             }).toList();
         } catch (Exception e) {
