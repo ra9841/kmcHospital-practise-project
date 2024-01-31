@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -152,6 +153,32 @@ public class PatientServiceImpl implements PatientService {
             return patientDto;
         }).toList();
 
+    }
+
+    @Override
+    public List<PatientDto> gettingAllListOfRecordOnPagingOnAscendingOrder(int pageSize, int pageNumber) {
+        Page<Patient> patients = patientRepository.findAll(PageRequest.of(pageNumber, pageSize));
+        return patients.stream()
+                .sorted(Comparator.comparing(Patient::getName)) // Sort by patient name
+                .map(patient -> {
+            PatientDto patientDto = new PatientDto();
+            BeanUtils.copyProperties(patient, patientDto);
+            log.info("List of Record {}", patientDto);
+            return patientDto;
+        }).toList();
+    }
+
+    @Override
+    public List<PatientDto> gettingAllListOfRecordOnPagingOnDescendingOrder(int pageSize, int pageNumber) {
+        Page<Patient> patients = patientRepository.findAll(PageRequest.of(pageNumber, pageSize));
+        return patients.stream()
+                .sorted(Comparator.comparing(Patient::getName).reversed()) // Sort by patient name
+                .map(patient -> {
+                    PatientDto patientDto = new PatientDto();
+                    BeanUtils.copyProperties(patient, patientDto);
+                    log.info("List of Record {}", patientDto);
+                    return patientDto;
+                }).toList();
     }
 
 

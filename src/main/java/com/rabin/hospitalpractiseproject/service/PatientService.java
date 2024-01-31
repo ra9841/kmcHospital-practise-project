@@ -14,4 +14,8 @@ public interface PatientService {
     List<PatientDto> gettingAllListOfRecordOnPagingBasis(int page, int limit);
 
     List<PatientDto> gettingAllListOfRecordOnPagingBasisNextVersion(int pageSize, int pageNumber);
+
+    List<PatientDto> gettingAllListOfRecordOnPagingOnAscendingOrder(int pageSize, int pageNumber);
+
+    List<PatientDto> gettingAllListOfRecordOnPagingOnDescendingOrder(int pageSize, int pageNumber);
 }
