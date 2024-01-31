@@ -1,4 +1,4 @@
-package com.rabin.hospitalpractiseproject.advice;
+package com.rabin.hospitalpractiseproject.aspect;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
