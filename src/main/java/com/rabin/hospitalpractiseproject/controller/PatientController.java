@@ -34,16 +34,28 @@ public class PatientController {
 
     }
 
-    @GetMapping("/shows")
+    @GetMapping("/shows")//localhost:8080/patients/shows?page=1&limit=3
     public ResponseEntity<List<PatientDto>> ListOfRecordOfPatientOnPagingBasis(@RequestParam(value="page", defaultValue ="0")int page,
                                                                                @RequestParam(value = "limit", defaultValue = "2")int limit){
         return ResponseEntity.status(HttpStatus.OK).body(patientService.gettingAllListOfRecordOnPagingBasis(page,limit));
     }
 
-    @GetMapping("/shows/v")
+    @GetMapping("/shows/v")//localhost:8080/patients/shows/v?pageSize=4&pageNo=1
     public ResponseEntity<List<PatientDto>> ListOfRecordOfPatientOnPagingBasisNextVersion(@RequestParam("pageSize")int pageSize,
                                                                                @RequestParam("pageNo")int pageNumber){
         return ResponseEntity.status(HttpStatus.OK).body(patientService.gettingAllListOfRecordOnPagingBasisNextVersion(pageSize,pageNumber));
+    }
+
+    @GetMapping("/ascending")//localhost:8080/patients/ascending?pageSize=4&pageNo=0
+    public ResponseEntity<List<PatientDto>> ListOfRecordOfPatientOnPagingOnAscendingOrder(@RequestParam("pageSize")int pageSize,
+                                                                                          @RequestParam("pageNo")int pageNumber){
+        return ResponseEntity.status(HttpStatus.OK).body(patientService.gettingAllListOfRecordOnPagingOnAscendingOrder(pageSize,pageNumber));
+    }
+
+    @GetMapping("/descending")//localhost:8080/patients/descending?pageSize=4&pageNo=0
+    public ResponseEntity<List<PatientDto>> ListOfRecordOfPatientOnPagingOnDescendingOrder(@RequestParam("pageSize")int pageSize,
+                                                                                          @RequestParam("pageNo")int pageNumber){
+        return ResponseEntity.status(HttpStatus.OK).body(patientService.gettingAllListOfRecordOnPagingOnDescendingOrder(pageSize,pageNumber));
     }
 
 
